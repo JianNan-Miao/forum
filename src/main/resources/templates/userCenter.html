@@ -126,7 +126,7 @@
            <div th:each="blogVo:${session.blogVos}">
                <br>
                <span>回复了:</span><span th:text="${blogVo.username}"></span><span>创建的主题：</span>
-               <span th:text="${blogVo.theme}"></span>&nbsp;&nbsp;&nbsp;<span th:text="${blogVo.replytime}"></span><br>
+               <a th:text="${blogVo.theme}" th:href="@{clickBlog(blogid=${blogVo.blogid})}"></a>&nbsp;&nbsp;&nbsp;<span th:text="${blogVo.replytime}"></span><br>
                <span th:text="${blogVo.msg}"></span><br>
            </div>
        </div>

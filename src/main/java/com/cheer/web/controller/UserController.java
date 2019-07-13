@@ -131,7 +131,7 @@ public class UserController {
 //                blogText=blog.getText();
 //                blogVo.setText(blogText);
 //            }
-
+            blogVo.setBlogid(blog.getBlogid());
             blogVo.setTheme(blog.getTheme());
             blogVo.setUsername(blog.getUsername());
             blogVo.setMsg(board.getMsg());
