@@ -68,7 +68,7 @@
       <div class="top">
 
           <span id="blog-name" >FreeChat</span>
-              <a id="blog-index" >注册</a>&nbsp;&nbsp;<a href="/regist" th:text="${session.user.username}" >注册</a>&nbsp;&nbsp;
+              <a id="blog-index"  href="regist">注册</a>&nbsp;&nbsp;<a href="/regist" th:text="${session.user.username}" >注册</a>&nbsp;&nbsp;
           <a href="userCenter"><img id="avatar" th:src="@{/avatar/{avatars}(avatars=${session.user.avatar})}" ></a>&nbsp;<a th:if="${session.user!=null}" th:text="登出" th:href="login">登录</a>&nbsp;
           <a  th:text="个人中心" href="userCenter"></a>
 
