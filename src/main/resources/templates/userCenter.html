@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .center{
+            margin: 0 auto;
+        }
+        .top-img{
+            float: left;
+        }
+        .top-usertext{
+            float: left;
+        }
+        .clear{
+            clear: both;
+        }
+        #user-img{
+            width: 45px;
+            height: 45px;
+        }
+        .top,.middle,.bottom{
+            margin-left: 480px;
+        }
+        .top{
+            margin-top: 5px;
+        }
+        #blog-name{
+            margin-left: 200px;
+            font-size: xx-large;
+        }
+        #btn-index{
+            margin-left: 1400px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+   <div class="center">
+       <div>
+           <span id="blog-name" >FreeChat</span><a  id="btn-index" href="index">首页</a>
+       </div>
+
+       <div class="title">
+           <nav class="navbar navbar-expand-lg navbar-light bg-light">
+               <a class="navbar-brand" href="#">全部</a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon"></span>
+               </button>
+
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                   <ul class="navbar-nav mr-auto">
+                       <li class="nav-item active">
+                           <a class="nav-link" href="#">技术 <span class="sr-only">(current)</span></a>
+                       </li>
+                       <li class="nav-item active">
+                           <a class="nav-link" href="#">生活 <span class="sr-only">(current)</span></a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">创意</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">数码</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">好玩</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">城市</a>
+                       </li>
+                   </ul>
+                   <form class="form-inline my-2 my-lg-0">
+                       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                   </form>
+               </div>
+           </nav>
+       </div>
+       <!--顶部页面-->
+       <div class="top">
+          <div class="top-img">
+              <img id="user-img" src="" alt="" th:src="@{/avatar/{avatars}(avatars=${session.user.avatar})}">
+          </div>
+           <div class="top-usertext">
+               &nbsp;<span th:text="${session.user.username}"></span><br>
+               &nbsp;<span>FreeChat第</span><span th:text="${session.user.userid}"></span><span>号会员,加入于</span>
+                <span th:text="${session.user.registtime}"></span>
+           </div>
+           <div class="clear"></div>
+       </div>
+
+       <!--中间页面-->
+       <div class="middle">
+           <div>
+               <button type="button" id="btn-theme" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                   您的主题
+               </button>
+
+               <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                   提问
+               </button>
+
+               <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+            sagittis lacus vel augue laoreet rutrum faucibus.">
+                   好玩
+               </button>
+
+               <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                   城市
+               </button>
+           </div>
+
+           <div id="blog-text" style="display: none">
+               <div  th:each="blog:${session.searchBlogList}">
+                   <span>主题：</span><a th:text="${blog.theme}" th:href="@{clickBlog(blogid=${blog.blogid})}"></a><br>
+               </div>
+           </div>
+       </div>
+
+       <!--底部页面-->
+       <div class="bottom">
+           <br>
+           <span th:text="${session.user.username}"></span><span>最近回复了</span><br>
+           <div th:each="blogVo:${session.blogVos}">
+               <br>
+               <span>回复了:</span><span th:text="${blogVo.username}"></span><span>创建的主题：</span>
+               <span th:text="${blogVo.theme}"></span>&nbsp;&nbsp;&nbsp;<span th:text="${blogVo.replytime}"></span><br>
+               <span th:text="${blogVo.msg}"></span><br>
+           </div>
+       </div>
+   </div>
+   <script>
+       $(function () {
+           $("#btn-theme").click(function () {
+               $("#blog-text").toggle();
+           })
+       })
+   </script>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

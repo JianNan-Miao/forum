@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- https://www.cnblogs.com/ysocean/p/7342498.html -->
+        <!-- 提示：一级缓存默认就是开启的，而且无法关闭 一级缓存指的是同一个session之间的数据共享-->
+        <!-- 启用缓存（二级）（总开关） 二级缓存是指不同session之前的数据共享-->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 日志 -->
+        <setting name="logImpl" value="log4j2"/>
+        <!-- 每次抓取的数量-->
+        <setting name="defaultFetchSize" value="100"/>
+        <!-- 是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!-- 类型别名 -->
+    <typeAliases>
+        <!-- 默认为包下面的类都定义一个别名：就是类名或者类名首字母小写-->
+        <package name="com.cheer.domain"/>
+    </typeAliases>
+<!--    <plugins>-->
+<!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+
+<!--        </plugin>-->
+<!--    </plugins>-->
+
+
+</configuration>

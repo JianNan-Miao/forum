@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .top{
+            margin: 0 auto;
+            width: 1500px;
+            height: 50px;
+        }
+
+        .btn-outline-primary{
+            margin-left: 1030px;
+        }
+        /*.title{*/
+        /*    clear: both;*/
+        /*}*/
+        #blog-name{
+            margin-left: 200px;
+            font-size: xx-large;
+        }
+        #blog-index{
+            margin-left: 885px;
+        }
+        #avatar {
+            width: 45px;
+            height: 45px;
+            margin-right: 20px;
+        }
+        .text-form{
+            margin-left: 1030px;
+        }
+        .theme{
+            width: 235px;
+        }
+        #avatar2{
+            width: 45px;
+            height: 45px;
+            margin-left: 20px;
+        }
+        #blogusername{
+
+            margin-left: 70px;
+        }
+        .blog-text{
+            float: left;
+        }
+        .hot-theme{
+            float: left;
+            margin-left: 600px;
+        }
+        .blog-status{
+            margin-top: 20px;
+        }
+        .clear{
+            clear: both;
+        }
+        .sumbd{
+            color: grey;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+   <div>
+      <div class="top">
+
+          <span id="blog-name" >FreeChat</span>
+              <a id="blog-index" >注册</a>&nbsp;&nbsp;<a href="/regist" th:text="${session.user.username}" >注册</a>&nbsp;&nbsp;
+          <a href="userCenter"><img id="avatar" th:src="@{/avatar/{avatars}(avatars=${session.user.avatar})}" ></a>&nbsp;<a th:if="${session.user!=null}" th:text="登出" th:href="login">登录</a>&nbsp;
+          <a  th:text="个人中心" href="userCenter"></a>
+
+      </div>
+
+   </div>
+
+   <div>
+
+       <button type="submit" class="btn btn-outline-primary">免费发布信息</button>
+
+       <form action="sendBlog" style="display: none" class="text-form" method="post">
+            <span>请输入主题</span><input type="text" class="theme" name="theme"><br>
+           <span>请输入内容</span><textarea name="text" id="" cols="30" rows="10" ></textarea><br>
+           <button type="submit" class="btn btn-primary" id="text-btn">发布</button>
+       </form>
+   </div>
+
+   <div class="title">
+       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+           <a class="navbar-brand" href="#">全部</a>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+           </button>
+
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav mr-auto">
+                   <li class="nav-item active">
+                       <a class="nav-link" href="#">技术 <span class="sr-only">(current)</span></a>
+                   </li>
+                   <li class="nav-item active">
+                       <a class="nav-link" href="#">生活 <span class="sr-only">(current)</span></a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="#">创意</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="#">数码</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">好玩</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">城市</a>
+                   </li>
+               </ul>
+               <form class="form-inline my-2 my-lg-0">
+                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+               </form>
+           </div>
+       </nav>
+   </div>
+<!--   博客展示内容-->
+   <div class="blog-text">
+     <div th:each="blog: ${session.blogs}">
+         <img id="avatar2" src="" th:src="@{/avatar/{avatars}(avatars=${blog.useravatar})}">
+         <a href="" th:href="@{clickBlog(blogid=${blog.blogid})}" th:text="${blog.theme}"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+         <span>总留言数：</span><span class="sumbd" th:text="${blog.sumbd}"></span><br>
+         <span  th:text="${blog.username}" id="blogusername"></span>
+         <span  th:text="${blog.blogtime}"></span>
+     </div>
+   </div>
+<!--   热门主题内容-->
+   <div class="hot-theme">
+       <span>今日热门话题:</span>
+       <div  th:each="blog: ${session.hotBlog}">
+           <a th:text="${blog.theme}" th:href="@{clickBlog(blogid=${blog.blogid})}"></a>
+       </div>
+       <!--   社区运营状况-->
+       <div class="blog-status">
+           <span>社区运营状况:</span>
+           <div>
+               <span>注册会员:</span><span th:text="${session.info.usernum}"></span><br>
+               <span>主题:</span><span th:text="${session.info.blognum}"></span><br>
+               <span>回复:</span><span th:text="${session.info.boardnum}"></span>
+           </div>
+       </div>
+   </div>
+   <div class="clear">
+
+   </div>
+
+
+   <script>
+       $(function () {
+           $(".btn-outline-primary").click(function () {
+               $(".text-form").toggle();
+           })
+
+
+       })
+   </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

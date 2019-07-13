@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheer.dao.BoardMapper">
+    <insert id="insertBoard">
+        insert into board values (#{boardid},#{username},#{blogid},#{msg},#{boardtime},#{useravatar})
+    </insert>
+    <select id="getBoard" resultType="com.cheer.domain.Board">
+        select * from board
+    </select>
+    <select id="findBoard" resultType="com.cheer.domain.Board">
+        select * from board where blogid=#{blogid}
+    </select>
+    <select id="searchBoard" resultType="com.cheer.domain.Board">
+        select * from board where username=#{username}
+    </select>
+
+
+</mapper>

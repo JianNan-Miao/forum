@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #main {
+            margin: 0 auto;
+            width: 60%;
+            position: relative;
+            top: 200px;
+        }
+
+        .cell {
+            display: inline-block;
+        }
+
+        .row .cell:nth-of-type(1) {
+            width: 45%;
+        }
+
+        .row .cell:nth-of-type(2) {
+            width: 40%;
+        }
+
+        .row {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .row + .row {
+            margin-top: 30px;
+        }
+
+        label {
+            display: inline-block;
+            width: 20%;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .cell + .cell {
+            margin-left: 100px;
+        }
+
+        input {
+            height: 25px;
+            width: 65%;
+        }
+
+        button {
+            width: 150px;
+            height: 40px;
+            background-color: rgba(22, 155, 213, 1);
+            border-radius: 10px;
+            border: 0;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<div id="main">
+    <form action="regist" method="post" enctype="multipart/form-data" >
+
+
+        <div class="row">
+            <div class="cell">
+                <label for="username">Username</label><input type="text" name="username" id="username">
+            </div>
+            <div class="cell">
+                <label for="password">Password</label><input type="password" name="password" id="password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell">
+                <label for="confirmPassword">Confirm Password</label><input type="password" name="confirmPassword"
+                                                                            id="confirmPassword">
+            </div>
+            <div class="cell">
+                <label for="avatar">Avatar</label><input type="file" name="upload" id="avatar">
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
