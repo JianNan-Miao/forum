@@ -10,16 +10,22 @@
         update blog set blogid=#{blogid},theme=#{theme},text=#{text},blogtime=#{blogtime},username=#{username},
         useravatar=#{useravatar},sumbd=#{sumbd} where blogid=#{blogid}
     </update>
+    <delete id="delBlog">
+        delete  from blog where blogid=#{blogid}
+    </delete>
 
 
     <select id="getBlog" resultType="com.cheer.domain.Blog">
-        select * from blog
+        select * from blog order  by sumbd desc
     </select>
     <select id="findBlog" resultType="com.cheer.domain.Blog">
         select * from blog where blogid=#{blogid}
     </select>
     <select id="searchBlog" resultType="com.cheer.domain.Blog">
         select * from blog where username=#{username}
+    </select>
+    <select id="likeQueryBlog" resultType="com.cheer.domain.Blog">
+         select  * from blog where theme like '%${theme}%'
     </select>
 
 </mapper>

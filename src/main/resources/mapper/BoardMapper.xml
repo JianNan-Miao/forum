@@ -6,6 +6,9 @@
     <insert id="insertBoard">
         insert into board values (#{boardid},#{username},#{blogid},#{msg},#{boardtime},#{useravatar})
     </insert>
+    <delete id="delBoard">
+        delete from board where blogid=#{blogid}
+    </delete>
     <select id="getBoard" resultType="com.cheer.domain.Board">
         select * from board
     </select>

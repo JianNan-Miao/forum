@@ -39,4 +39,14 @@ public class BlogServiceImpl implements BlogService {
         List<Blog> blogList = blogMapper.searchBlog(username);
         return blogList;
     }
+
+    @Override
+    public void delBlog(Integer blogid) {
+        blogMapper.delBlog(blogid);
+    }
+
+    @Override
+    public List<Blog> likeQueryBlog(String theme) {
+       return blogMapper.likeQueryBlog(theme);
+    }
 }

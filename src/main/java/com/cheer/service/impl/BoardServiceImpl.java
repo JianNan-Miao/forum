@@ -33,4 +33,9 @@ public class BoardServiceImpl implements BoardService {
          List<Board> boardList=boardMapper.searchBoard(username);
          return boardList;
     }
+
+    @Override
+    public void delBoard(Integer blogid) {
+        boardMapper.delBoard(blogid);
+    }
 }

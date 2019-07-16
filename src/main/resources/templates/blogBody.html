@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        .blogbody{
+            background-color: aliceblue;
+        }
         .blog-body{
 
             margin-top: 15px;
@@ -59,82 +62,84 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-    <div>
-        <span id="blog-name" >FreeChat</span><a  id="btn-index" href="index">首页</a>
-    </div>
+    <div class="blogbody">
+        <div>
+            <span id="blog-name" >FreeChat</span><a  id="btn-index" href="index">首页</a>
+        </div>
 
-    <div class="title">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">全部</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="title">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">全部</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">技术 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">生活 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">创意</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">数码</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">好玩</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">城市</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">技术 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">生活 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">创意</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">数码</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">好玩</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">城市</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <div class="blog-body">
+
+            <span class="titles">标题:</span>
+            <div class="blog-theme" style="position:relative">
+                <h2 th:text="${session.blog.theme}" style="position: absolute"></h2>
+                <img src="" id="images" th:src="@{/avatar/{avatars}(avatars=${session.blog.useravatar})}">
             </div>
-        </nav>
+            <div class="blog-name">
+                <span th:text="${session.blog.username}"></span>&nbsp;
+                <span th:text="${session.blog.blogtime}"></span>
+            </div>
+            <HR width="100%" color=gray />
+            <div class="blog-text">
+                <span>内容:</span><h4 th:text="${session.blog.text}"></h4>
+            </div>
+        </div>
+        <HR width="100%" color=gray />
+        <!--留言区-->
+        <div>
+            <span id="board-area">评论区</span>
+            <div th:each="board:${session.boards}">
+                <img  class="board-img" src="" th:src="@{/avatar/{avatars}(avatars=${board.useravatar})}">
+                <span th:text="${board.username}"></span><br>
+                <span class="board-msg" th:text="${board.msg}"></span>&nbsp;
+                <span th:text="${board.boardtime}"></span>
+            </div>
+        </div>
+
+        <!--发表留言区-->
+        <div class="bottom">
+            <span>添加一条新回复</span><br>
+            <form action="sendBoard" method="post">
+                <textarea name="msg" id="" cols="80" rows="8" ></textarea><br>
+                <button type="submit" class="btn-secondary ">回复</button>
+            </form>
+        </div>
     </div>
-
-   <div class="blog-body">
-
-        <span class="titles">标题:</span>
-       <div class="blog-theme" style="position:relative">
-           <h2 th:text="${session.blog.theme}" style="position: absolute"></h2>
-           <img src="" id="images" th:src="@{/avatar/{avatars}(avatars=${session.blog.useravatar})}">
-       </div>
-       <div class="blog-name">
-           <span th:text="${session.blog.username}"></span>&nbsp;
-           <span th:text="${session.blog.blogtime}"></span>
-       </div>
-       <HR width="100%" color=gray />
-       <div class="blog-text">
-           <span>内容:</span><h4 th:text="${session.blog.text}"></h4>
-       </div>
-   </div>
-   <HR width="100%" color=gray />
-    <!--留言区-->
-   <div>
-       <span id="board-area">评论区</span>
-       <div th:each="board:${session.boards}">
-           <img  class="board-img" src="" th:src="@{/avatar/{avatars}(avatars=${board.useravatar})}">
-           <span th:text="${board.username}"></span><br>
-           <span class="board-msg" th:text="${board.msg}"></span>&nbsp;
-           <span th:text="${board.boardtime}"></span>
-       </div>
-   </div>
-
-   <!--发表留言区-->
-   <div class="bottom">
-      <span>添加一条新回复</span><br>
-       <form action="sendBoard" method="post">
-           <textarea name="msg" id="" cols="80" rows="8" ></textarea><br>
-           <button type="submit" class="btn-secondary ">回复</button>
-       </form>
-   </div>
    <script>
 
    </script>

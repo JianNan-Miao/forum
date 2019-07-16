@@ -27,10 +27,18 @@ public class BlogController {
 
     @RequestMapping("sendBlog")
     public String sendBlog(Blog blog, HttpSession session){
+        //size表示blog表中blogid的最大值
+        int size=0;
         String fmt = "yyyyMM-dd HH:mm";
         SimpleDateFormat sdf = new SimpleDateFormat(fmt);
         String dateStr = sdf.format(new Date());
-        int size = blogService.getBlog().size();
+       //获取blog表中blogid的最大值并赋值给size
+        List<Blog> blogList = blogService.getBlog();
+        for (Blog blog1 : blogList) {
+            if(blog1.getBlogid()>size){
+                size=blog1.getBlogid();
+            }
+        }
         User user = (User) session.getAttribute("user");
         blog.setBlogid(size+1);
         blog.setBlogtime(dateStr);
@@ -58,4 +66,8 @@ public class BlogController {
         session.setAttribute("boards",boards);
         return "redirect:blogBody";
     }
+
+
+
+
 }

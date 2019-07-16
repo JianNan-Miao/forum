@@ -1,6 +1,7 @@
 package com.cheer.domain;
 
 public class Blog {
+    // TODO
     private  int blogid;
     private  String theme;
     private  String text;

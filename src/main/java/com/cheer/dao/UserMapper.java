@@ -7,9 +7,12 @@ import java.util.List;
 
 public interface UserMapper {
 
-    public List<User> getUserList();
+    // TODO
+     List<User> getUserList();
 
-    public void insertUser(User user);
+     void insertUser(User user);
 
-    public User getUser(@Param("username") String username,@Param("password") String password);
+     User getUser(@Param("username") String username,@Param("password") String password);
+
+     User getUserByUsername(String username);
 }

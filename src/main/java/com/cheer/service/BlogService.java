@@ -6,13 +6,17 @@ import java.util.List;
 
 public interface BlogService {
 
-    public void insertBlog(Blog blog);
+     void insertBlog(Blog blog);
 
-    public List<Blog> getBlog();
+     List<Blog> getBlog();
 
-    public Blog findBlog(Integer blogid);
+     Blog findBlog(Integer blogid);
 
-    public void updateBlog(Blog blog);
+    void updateBlog(Blog blog);
 
-    public List<Blog> searchBlog(String username);
+     List<Blog> searchBlog(String username);
+
+     void delBlog(Integer blogid);
+
+    List<Blog> likeQueryBlog(String theme);
 }

@@ -1,18 +1,25 @@
 package com.cheer.dao;
 
 import com.cheer.domain.Blog;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface BlogMapper {
 
-    public void insertBlog(Blog blog);
+     void insertBlog(Blog blog);
 
-    public List<Blog> getBlog();
+     List<Blog> getBlog();
 
-    public Blog findBlog(Integer blogid);
+     Blog findBlog(Integer blogid);
 
-    public void updateBlog(Blog blog);
+     void updateBlog(Blog blog);
 
-    public List<Blog> searchBlog(String username);
+     List<Blog> searchBlog(String username);
+
+     void delBlog(Integer blogid);
+
+     List<Blog> likeQueryBlog(@Param("theme") String theme);
+
+
 }

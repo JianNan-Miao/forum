@@ -9,11 +9,12 @@
     <select id="getUser" resultType="com.cheer.domain.User">
         select  * from user where username=#{username} and password=#{password}
     </select>
-    <select id="findUser" resultType="com.cheer.domain.User">
+    <select id="getUserByUsername" resultType="com.cheer.domain.User">
         select * from user where username=#{username}
     </select>
     <select id="getUserList" resultType="com.cheer.domain.User">
         select * from user
     </select>
+
 
 </mapper>
